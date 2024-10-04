@@ -1,16 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const authenticateToken = require('../Middleware/auth');
-const { addToCart, removeFromCart } = require('../Controller/AddCartController');
+const { addToCart, removeFromCart, updateQuantityInCart, getCartItems, clearCart } = require('../Controller/AddCartController');
 
-// @route POST /api/cart/add
-// @desc Add or update item in cart
-// @access Private (authenticated users only)
-router.post('/add', authenticateToken, addToCart);
+router.post('/cart/add', authenticateToken, addToCart);
 
-// @route DELETE /api/cart/remove
-// @desc Remove item from cart
-// @access Private (authenticated users only)
-router.delete('/remove', authenticateToken, removeFromCart);
+router.post('/cart/remove', authenticateToken, removeFromCart);
+
+router.patch('/cart/update', authenticateToken, updateQuantityInCart);
+
+router.get('/cart/', authenticateToken, getCartItems);
+
+router.post('/cart/clear', authenticateToken, clearCart);
 
 module.exports = router;

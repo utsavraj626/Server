@@ -5,7 +5,6 @@ const validateUserRegistration = [
   check('name', 'Name is required').not().isEmpty(),
   check('email', 'Please include a valid email').isEmail(),
   check('password', 'Password must be at least 6 characters long').isLength({ min: 6 }),
-  check('role', 'Role must be either user or admin').isIn(['user', 'admin']),
   (req, res, next) => {
     // Check for validation errors
     const errors = validationResult(req);
@@ -32,11 +31,11 @@ const validateUserLogin = [
 
 
 const validateAddFood = [
-    check('categoryName', 'Category name is required').not().isEmpty(),
-    check('name', 'Food name is required').not().isEmpty(),
-    check('description', 'Description is required').not().isEmpty(),
-    check('image', 'Image URL is required').not().isEmpty().isURL().withMessage('Invalid image URL'),
-    check('price', 'Price is required and must be a positive number').isFloat({ gt: 0 })
+  check('name', 'Food name is required').not().isEmpty(),
+  check('description', 'Description is required').not().isEmpty(),
+  check('price', 'Price is required and must be a positive number').isFloat({ gt: 0 }),
+  check('category', 'Category name is required').not().isEmpty(),
+  check('imageUrl', 'Image URL is required').not().isEmpty().isURL().withMessage('Invalid image URL'),
   ];
 
 module.exports = {

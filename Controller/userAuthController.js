@@ -31,7 +31,8 @@ const registerUser = async (req, res) => {
     const payload = { userId: newUser._id, role: newUser.role };
     const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '20h' });
 
-    res.status(201).json({ success: true, token, msg: 'User registered successfully' });
+    // Respond with success and token
+    res.status(201).json({ success: true, token, userInfo: payload, msg: 'User registered successfully' });
   } catch (error) {
     console.error('Register error:', error.message);
     res.status(500).json({ success: false, msg: 'Server error' });
@@ -56,10 +57,17 @@ const loginUser = async (req, res) => {
     }
 
     // Generate JWT token
-    const payload = { userId: user._id, role: user.role };
-    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '20h' });
+    const payload = { userId: user._id, role: user.role, name: user.name };
+    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-    res.status(200).json({ success: true, token, msg: 'Login successful' });
+    // Respond with success and token
+    res.status(200)
+    .cookie("auth_token", token, {
+      httpOnly: true,
+      maxAge: 86400000,
+      secure: true
+    })
+    .json({ success: true, token, userInfo: payload, msg: 'Login successful' });
   } catch (error) {
     console.error('Login error:', error.message);
     res.status(500).json({ success: false, msg: 'Server error' });
@@ -70,4 +78,3 @@ module.exports = {
   registerUser,
   loginUser
 };
-

@@ -3,12 +3,12 @@ const Schema = mongoose.Schema;
 
 // Define the Food schema
 const FoodSchema = new Schema({
-  userId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',  // This references the 'User' schema, specifically for admin
-    required: true
-  },
-  categoryName: {
+  // userId: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'User',  // This references the 'User' schema, specifically for admin
+  //   required: true
+  // },
+  category: {
     type: String,
     required: true
   },
@@ -22,7 +22,7 @@ const FoodSchema = new Schema({
     required: true,
     trim: true
   },
-  image: {
+  imageUrl: {
     type: String,
     required: true
   },
