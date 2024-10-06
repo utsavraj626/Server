@@ -14,16 +14,24 @@ app.use(cookieParser());
 // app.use(bodyParser.urlencoded({ extended: true }));
 database.connect();
 
-app.use(
-	cors({
+// app.use(
+// 	cors({
 		
-		// origin: "http://localhost:3000",
-		origin: "restro-gamma.vercel.app",
-		// origin: "*",
-		// origin:"https://picland-azure.vercel.app/",
-		credentials: true,
-	})
+// 		// origin: "http://localhost:3000",
+// 		origin: "restro-gamma.vercel.app",
+// 		// origin: "*",
+// 		// origin:"https://picland-azure.vercel.app/",
+// 		credentials: true,
+// 	})
+// );
+
+app.use(
+  cors({
+    origin: "https://restro-gamma.vercel.app", // Include the full domain with HTTPS
+    credentials: true, // Allow credentials if you're using cookies for authentication
+  })
 );
+
 
 //setting up routes
 const userRoute = require("./Router/userRouter");
