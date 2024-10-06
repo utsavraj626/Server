@@ -27,10 +27,13 @@ database.connect();
 
 app.use(
   cors({
-    origin: "https://restro-gamma.vercel.app", // Include the full domain with HTTPS
-    credentials: true, // Allow credentials if you're using cookies for authentication
+    origin: "https://restro-gamma.vercel.app",
+    credentials: true, // Allow credentials (cookies, authentication tokens)
+    methods: "GET,POST,PUT,DELETE,OPTIONS", // List allowed HTTP methods
+    allowedHeaders: "Content-Type,Authorization", // List allowed headers
   })
 );
+
 
 
 //setting up routes
