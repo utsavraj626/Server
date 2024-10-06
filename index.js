@@ -25,14 +25,7 @@ database.connect();
 // 	})
 // );
 
-app.use(
-  cors({
-    origin: "https://restro-gamma.vercel.app",
-    credentials: true, // Allow credentials (cookies, authentication tokens)
-    methods: "GET,POST,PUT,DELETE,OPTIONS", // List allowed HTTP methods
-    allowedHeaders: "Content-Type,Authorization", // List allowed headers
-  })
-);
+app.options('*', cors()); // Preflight response for all routes
 
 
 
