@@ -14,30 +14,15 @@ app.use(cookieParser());
 // app.use(bodyParser.urlencoded({ extended: true }));
 database.connect();
 
-const app = express();
-
-const PORT = process.env.PORT || 8000;
-
-// Use JSON and URL-encoded middlewares
-app.use(express.json());
-app.use(express.urlencoded({ limit: '16kb' }));
-
-// Cookie parser middleware
-app.use(cookieParser());
-
-// CORS Middleware
 app.use(
-  cors({
-    origin: "https://restro-gamma.vercel.app", // Include the exact origin
-    credentials: true, // Allow credentials (cookies, etc.)
-    methods: "GET,POST,PUT,DELETE,OPTIONS", // Allow specific HTTP methods
-    allowedHeaders: "Content-Type,Authorization", // Specify allowed headers
-  })
+	cors({
+		
+		origin: "http://localhost:3000",
+		// origin: "*",
+		// origin:"https://picland-azure.vercel.app/",
+		credentials: true,
+	})
 );
-
-// Handle preflight requests
-app.options('*', cors());
-
 
 //setting up routes
 const userRoute = require("./Router/userRouter");
