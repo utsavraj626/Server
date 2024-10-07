@@ -17,9 +17,9 @@ database.connect();
 app.use(
 	cors({
 		
-		origin: "http://localhost:3000",
+		// origin: "http://localhost:3000",
 		// origin: "*",
-		// origin:"https://picland-azure.vercel.app/",
+		origin:"https://restro-gamma.vercel.app",
 		credentials: true,
 	})
 );
